@@ -1,13 +1,13 @@
 ---
 name: english-tutoring
-description: Develops lesson plans for teaching English to ESL/EFL learners (non-native speakers, general English or exam prep). Use when the user asks to create, draft, or plan an English lesson, class, or unit — e.g. "write a lesson plan for present perfect", "plan a B1 speaking class", "I need a 45-minute ESL lesson on phrasal verbs", or "help me teach conditionals to intermediate students". Covers grammar, vocabulary, speaking, listening, reading, and writing lessons across CEFR levels A1-C2, and can build single lessons or multi-lesson units.
+description: Develops lesson plans for one-on-one English tutoring of a single ESL/EFL learner (non-native speaker, general English or exam prep). Use when the user asks to create, draft, or plan an English lesson or unit for one student — e.g. "write a lesson plan for present perfect for my student Maria", "I need a 45-minute ESL lesson on phrasal verbs for my tutee", or "help me teach conditionals to my intermediate student". Covers grammar, vocabulary, speaking, listening, reading, and writing lessons across CEFR levels A1-C2, and can build single lessons or multi-lesson units. For a class of several students (group classes, mixed levels), use english-classroom instead.
 ---
 
 # ESL Lesson Plans
 
 Build classroom-ready English lesson plans for ESL/EFL learners. Adapt structure, depth, and format to what the user asks for — don't force a template they didn't request.
 
-**This skill covers one-on-one tutoring only.** Group classes need different personalization logic (shared themes instead of one student's interests, per-student differentiation, etc.) and are intentionally out of scope for now — treat any group-class request as a case for a separate skill rather than stretching this one to fit.
+**This skill covers one-on-one tutoring only.** Group classes need different personalization logic (shared themes instead of one student's interests, per-student differentiation, etc.) and are handled by the separate `english-classroom` skill — if the tutor describes a class of several students, point them to that skill rather than stretching this one to fit.
 
 ## Step 0: Check for a returning student
 
