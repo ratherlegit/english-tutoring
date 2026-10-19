@@ -42,6 +42,7 @@ Ask for the following as **separate questions**, in this order — don't merge d
 - **Single lesson or learning path** — ask only whether it's one lesson or a multi-lesson path. **If a path is chosen, immediately ask how many lessons as the very next question**, before moving on to anything else — don't leave it implicit or bundle it with later questions, and never suggest or default to a specific number
 - **Key skills to focus on** — if a path, which skills should get the most weight (e.g. speaking fluency, exam writing, listening comprehension) — this biases activity/theme selection across the whole path, not just one lesson
 - **Anything else to incorporate or exclude** — e.g. topics to avoid (sensitive for this student), a coursebook/curriculum to align with, grammar points already mastered (skip re-teaching) or specifically requested
+- **Prior work with this student (always the last question)** — ask whether the tutor has any documents from earlier work with this student (old lesson plans, handouts, vocab lists, notes, a coursebook unit) that they can share, by file path, folder, or pasted text. See "Importing prior work" below. "No, they're new to me" is a fine answer and ends the interview
 
 ### Light mode
 Same information, bundled into four open-ended prompts instead of ~11 separate questions. Ask them one at a time, in order — each answer can be a short free-text paragraph covering multiple things at once:
@@ -50,13 +51,23 @@ Same information, bundled into four open-ended prompts instead of ~11 separate q
 3. "What's their goal for learning English, and how long are your sessions (30 min, 60 min, other)?"
 4. "Is this a single lesson or a learning path (if a path, how many lessons)? And any preferences for activities or things to include/exclude — or just say 'you choose' for defaults."
 
+After the four prompts, ask the same closing question as detailed mode: "Do you have any documents from earlier work with this student (old lesson plans, handouts, vocab lists, notes) that I can look at so I don't repeat their vocabulary?"
+
 Parse each free-text answer into the same underlying fields as detailed mode (name, pronouns, level, location, interests, goal, session length, single/path + count, activity choice, key skills, exclusions) before moving to Step 2 — light mode changes how the questions are asked, not what ends up stored in the record. If an answer leaves something out or is ambiguous, ask a quick one-off follow-up for just that item rather than guessing.
+
+### Importing prior work
+If the tutor shares prior documents, read them all (`.docx`, `.pdf`, `.md`, `.txt`, or pasted text) before building the record, and pull out:
+- **Every vocabulary word or phrase previously taught or practiced.** Add them to the student's Vocabulary Log under a heading like `### Imported from prior work (<source file or description>)`, so Fresh Vocabulary never presents them as new (the existing "never repeat a word already taught" rule covers them). They remain eligible for Vocab Review, where recycling them is encouraged
+- Grammar points already covered, so they're skipped or only recycled (note them in the profile's Exclusions or as "already covered")
+- Anything useful for personalization the tutor didn't mention (interests, recurring errors, topics that landed well)
+
+Show the tutor the extracted vocab list in one compact block and ask them to confirm or correct it before saving. If a document can't be read, say so plainly and ask for a pasted copy. If the tutor has nothing to share, move on; they can offer documents later and you import them the same way.
 
 Either mode: **do not ask about vocab preferences or home assignments in this initial round.** Those only matter once an actual lesson is being written (see Step 4) — a tutor who's just asking for a learning path shouldn't have to answer questions about a single lesson's vocab section yet.
 
 See `references/student-interview.md` for the full question set, why each matters, and an L1-interference cheat sheet to use once you know the student's location (map it to a likely native language yourself).
 
-For a returning student with an existing record (see Step 0), don't run this interview at all beyond the brief check-in described there.
+For a returning student with an existing record (see Step 0), don't run this interview at all beyond the brief check-in described there. If they've got new prior-work documents to add, import them the same way.
 
 ## Step 2: Design the learning path
 
@@ -129,7 +140,7 @@ Always placed immediately after the Objective, before Vocab Review or any lesson
 
 ### Vocab Review section (recycling)
 New vocabulary that's never revisited doesn't stick. Before introducing new words, spend a few minutes recycling old ones:
-- Pull 2-4 items from the student's Vocabulary Log (in the record file) — prioritize items from lessons that are neither the most recent one (too fresh to need review yet) nor ones already reviewed multiple times, so review rotates through everything taught rather than only ever touching the last lesson's words
+- Pull 2-4 items from the student's Vocabulary Log (in the record file), including words imported from prior work, which are fair game for review even though they must never appear in Fresh Vocabulary as new — prioritize items from lessons that are neither the most recent one (too fresh to need review yet) nor ones already reviewed multiple times, so review rotates through everything taught rather than only ever touching the last lesson's words
 - A quick format works fine: a short prompt sentence with the word blanked out, or "use this word in a sentence about..." tied back to the student's interests
 - Skip this section for a student's first-ever lesson (nothing to review yet)
 
