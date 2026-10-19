@@ -71,6 +71,7 @@ Output the path as a table:
 The Activity Type(s) column can list 2-3 activities per lesson, since Step 4 builds out that many for the Production stage — the path table is just the preview of what each lesson will offer.
 
 Rules for building the path:
+- **Grammar depth per lesson**: if the tutor wants no grammar focus for a lesson, write "None" in its Grammar Point column; for a light focus, still name the point but note "(light)". Ask the strong/light/none question (see Step 4) when designing the path if the tutor hasn't said, and let them vary it per lesson
 - **Vary grammar points** across lessons, all appropriate to the student's level — don't drill one structure for the whole path unless the tutor specifically asked for that. Use `references/cefr-levels.md` to keep every grammar point within (or just at the edge of) the student's level, and sequence roughly from simpler to more complex where there's a natural order (e.g. present simple before present perfect before third conditional)
 - **Vary activity types** across the path, pulling primarily from `references/teacher-activities.md`. Repetition of an activity is fine in longer paths, but space repeats out — don't repeat an activity within at least 3-4 lessons of its last use, and never back-to-back
 - **Keep external-material activities rare across the path too** — default to the generated, self-contained activities (see "Choosing the activities" in Step 4) and don't schedule the found-article/media-clip activities back-to-back or in most lessons; one every few lessons at most, only where it clearly fits
@@ -99,6 +100,7 @@ Before drafting, if not already answered for this student, ask:
 - **Vocab constraint** — any preference for the fresh vocabulary section: phrasal verbs specifically, a certain part of speech (nouns, adjectives, etc.), or no constraint (default: mixed, chosen to fit the topic/interest)
 - **Number of vocab words/phrases** — how many items to include (default: 6-10 if the tutor doesn't specify)
 - **Home assignment** — whether to include a take-home assignment section (default: include, unless the tutor opts out)
+- **Grammar focus depth** — ask whether the lesson's grammar focus should be **strong** (detailed instruction, deeply integrated into the practice and activities), **light** (brief overview, with the grammar lightly woven into the other activities), or **none** (no grammar focus at all, just topical activities). Explain each option in one short line as you ask. If the lesson comes from a learning path, the tutor can pick per lesson; reuse the answer for later lessons unless they want to change it
 - **Teacher's notes** — pedagogical rationale, timing/pacing tips, anticipated difficulties, and alternative approaches for the tutor's own reference (not shown to the student). Ask whether these should be **integrated** throughout the plan (a short note under each relevant stage), **end-only** (a single "Teacher's Notes" section after everything else), or **not included** at all. Default: **integrated** — plenty of tutors find inline notes useful, but let anyone who doesn't want them turn them off or push them to the end
 - **Student handout** — only ask this if teacher's notes are set to integrated or end-only: whether the tutor also wants a second, notes-free version of the plan suitable for handing to the student. Default: **yes**, unless the tutor opts out
 
@@ -107,11 +109,11 @@ These only need answering once — for a single-lesson request, ask them right a
 **Don't open the plan with a student-details or framework header** (e.g. a block restating the student's name/level/interests, or naming the PPP/TBL/ESA framework being used) — that's internal planning context, not something the tutor needs printed at the top of a document they'll use in front of a student. Start straight in with the lesson content.
 
 Unless the user specifies their own format, include, **in this order**:
-1. **Objective(s)** — a can-do statement ("Students will be able to...")
+1. **Objective(s)** — a can-do statement written directly to the student in the second person ("You will be able to..."), never in the third person ("Students will...", "The student will...")
 2. **Warm Up Conversation** — always comes immediately after the objective, before any vocab or content; see below for what goes in it
 3. **Vocab Review** (only from Lesson 2 of a path onward, or any returning student) — see below
 4. **Fresh Vocabulary** — always include this section (see below)
-5. **Grammar Focus** — presentation/input, controlled practice, freer practice, per the chosen framework (PPP's "Presentation" stage; use whatever this stage is called under a different framework — see `references/lesson-frameworks.md`)
+5. **Grammar Focus** — scaled to the depth the tutor chose (see "Grammar Focus section" below). **Strong**: presentation/input, controlled practice, and freer practice per the chosen framework (PPP's "Presentation" stage; use whatever this stage is called under a different framework — see `references/lesson-frameworks.md`), and the target grammar is built into the activities too. **Light**: a brief overview only (a short plain-language rule, a formula if there is one, 2-3 examples), with the target grammar woven into the activities' prompts rather than drilled separately. **None**: omit this section entirely and build the lesson around topical activities; don't sneak a grammar explanation back in
 6. **Production/application activities** — students use the language with some autonomy, built from **several** activities per the chosen selection method (see below), not just one. This isn't a wrapping "Production" heading in the document itself, just the label for this stage in your own planning — go straight from Grammar Focus into the first activity's own heading (see "Choosing the activities" below)
 7. **Wrap-up / assessment** — quick check of the objective (not necessarily formal testing)
 8. **Home Assignment** — included by default; omit only if the tutor opted out during the interview
@@ -137,7 +139,7 @@ Every lesson gets a standalone new-vocabulary section, not just vocab folded int
 - Use the count the tutor specified (default 6-10 if unspecified), tied to the lesson's theme and therefore to the student's stated interests — every example sentence should read as if written for this specific student, not generic
 - **Pitch vocab one CEFR level above the student's current level** (A2 student → A2/B1-boundary or B1 vocab; B1 → B2; B2 → C1; C1 → C2; a C2 student stays at C2 but pushes toward rarer/more nuanced items). This is a deliberate stretch to grow the student, not a comprehension check — use `references/cefr-levels.md` to judge what "one level up" looks like in practice
 - Apply the vocab constraint from the interview: if phrasal verbs were requested, every item is a phrasal verb; if a part of speech was requested, every item matches it; otherwise mix naturally around the topic
-- Lead with collocations, not isolated definitions (e.g. for "address" as a verb: "address a problem/concern/issue", not just a dictionary gloss) — collocation is what makes vocabulary usable, not just recognizable
+- Make the word usable, not just recognizable: choose natural, collocation-rich example sentences (e.g. for "address" as a verb, an example like "We need to address the noise problem."). The collocations live in the Example line, never in parentheses in the definition
 - **Never repeat a word/phrase already taught to this student.** Check the student's record file (below) before finalizing the list, and swap out any overlap
 
 **Format** — every vocab item is written exactly as:
@@ -145,10 +147,10 @@ Every lesson gets a standalone new-vocabulary section, not just vocab folded int
 word – definition
 Example: example sentence
 ```
-Use an en dash (–) between word and definition, and the example sentence must connect to the lesson's theme/the student's interests, not be a generic textbook sentence.
+Use an en dash (–) between word and definition. **Keep the definition clean: a plain-language meaning only, with no parentheses and no sample phrases or collocations inside it** (the Example line below it already shows the word in use). The example sentence must connect to the lesson's theme/the student's interests, not be a generic textbook sentence.
 
 ### Grammar Focus section
-This is the lesson's main teaching point, and it needs to actually teach it, not just gesture at it with a couple of examples. For the presentation/input part of this stage, always include:
+Applies to the **strong** and **light** depths (skip the whole section for **none**). A light focus keeps just the short rule, formula, and 2-3 examples from the list below and skips the separate controlled/freer practice; the grammar then shows up inside the activities (e.g. a prompt that invites the target structure). A strong focus is the lesson's main teaching point, and it needs to actually teach it, not just gesture at it with a couple of examples, and the activities should keep requiring the structure. For the presentation/input part of this stage, always include:
 - **A clear, plain-language explanation of the rule** — what it means and when a speaker would reach for it, not just its name. Don't assume the name of the structure is self-explanatory.
 - **A formula, if the structure has one, kept as short as possible** (e.g. *be* + past participle; *have/has* + past participle; *If* + past simple, *would* + base verb). Don't qualify it with parentheticals like "(in the correct tense)" or explain implementation details in the same line, that's implied and the tutor can explain it live if the student needs it. Skip the formula entirely for grammar points that aren't formulaic (e.g. article usage, word order preferences).
 - **Several thematic examples**, tied to the lesson's topic and the student's interests, not generic textbook sentences. Two examples is too thin, aim for enough that the pattern is clearly visible.
@@ -156,7 +158,7 @@ This is the lesson's main teaching point, and it needs to actually teach it, not
 
 Keep the whole presentation tight and skimmable. Don't add asides about edge cases or usage nuance (e.g. when to drop an agent/actor from a sentence, formality register, etc.) into the main explanation, formula, or examples, that kind of detail belongs in a Teacher's Note if it's worth flagging at all, not woven into the student-facing explanation where it disrupts the flow.
 
-Controlled practice and freer practice follow the presentation as usual (per the chosen framework), building on the examples and formula already established rather than introducing the structure for the first time there.
+For a strong focus, controlled practice and freer practice follow the presentation as usual (per the chosen framework), building on the examples and formula already established rather than introducing the structure for the first time there.
 
 ### Teacher's Notes
 These are for the tutor only — never phrase them as if speaking to the student. Keep each note short (1-2 sentences): pacing/timing guidance, why a stage or activity was chosen, a likely sticking point for this student specifically (e.g. an anticipated L1-interference error, a grammar point they've struggled with before), or a quick alternative if something isn't landing.
@@ -172,7 +174,7 @@ If the tutor opted in, produce a second copy of the plan after the main one. **T
 - **Materials needed**
 - **Time Summary**
 
-Nothing else changes. Every other section carries over as-is, in the same order: Warm Up Conversation (including its bulleted questions, unchanged), Vocab Review, Fresh Vocabulary, Grammar Focus, every Production activity's full instructions, Wrap-up, Home Assignment. Since activity instructions are already written addressed to the student (see "Choosing the activities" above), there's no rephrasing to do — copy the content over and delete only the three tutor-only sections.
+Nothing else changes (the objective, activity instructions, and every other student-facing line are already written to the student, so no rewording is needed). Every other section carries over as-is, in the same order: Warm Up Conversation (including its bulleted questions, unchanged), Vocab Review, Fresh Vocabulary, Grammar Focus, every Production activity's full instructions, Wrap-up, Home Assignment. Since activity instructions are already written addressed to the student (see "Choosing the activities" above), there's no rephrasing to do — copy the content over and delete only the three tutor-only sections.
 
 Label it plainly with just the lesson name (e.g. "## <Lesson Name> — Student Handout") — **don't** add any parenthetical or caption describing what was stripped out (e.g. never write something like "(Teacher's notes and Materials removed)"); the student should never see a trace of what the tutor-only version contained.
 
@@ -194,6 +196,7 @@ Maintain one file per student at `~/eng-teaching-records/<student-name-slug>.md`
 - Activity choice: ...
 - Vocab constraint: ...
 - Vocab count: ...
+- Grammar focus depth: strong/light/none
 - Home assignment: yes/no
 - Teacher's notes: integrated/end-only/none
 - Key skills weighting: ...
@@ -227,11 +230,11 @@ Include **2-3 activities** in the Production/application stage, not a single fix
 
 If Describe a Picture is used, list the photo in **Materials needed** as something the tutor still needs to bring (e.g. "A photo of a busy market or street scene, tutor to provide"), and add a Teacher's Note suggesting what kind of image would work well for this lesson's theme.
 
-Present each option under its own heading (e.g. "Activity A / Activity B / Activity C") with no separate stage heading wrapping them — go straight from the Grammar Focus content into the first activity heading. No time next to each heading; list a suggested time per activity in the Time Summary section instead. Don't write any framing sentence like "choose from these activities" or "you don't need to do all three" into the plan itself, that's implicit from the labeled options and belongs in your own planning, not in the document. **It's fine — expected, even — for the activities' combined time to run longer than the session length.** These are options to pick from live, not a mandatory sequence, so the tutor isn't meant to run all of them every time. Don't shrink or cut activities just to force this stage's total to fit the class length; a plan with more material than one session needs is more useful than one that runs out with time left over.
+Present each option under its own heading named after the activity itself (e.g. "Role Play: Ordering at a Cafe"), **never lettered or numbered** ("Activity A", "Activity 2"), because the tutor may reorder, skip, or swap them live. **Every activity must work with no dependencies: if the tutor runs only this one, it must be complete.** Never refer to another activity by name or position ("as in Activity A", "after the debate", "use the words from the previous task"), and never rely on something produced in a different activity. Activities may share a story, setting, or theme (a nice touch when several are used), but each one must restate whatever it needs from that shared context (introduce the characters, the situation, the key facts) so it makes sense alone, and none may require another to have been done first. There is no separate stage heading wrapping them — go straight from the Grammar Focus content into the first activity heading. No time next to each heading; list a suggested time per activity in the Time Summary section instead. Don't write any framing sentence like "choose from these activities" or "you don't need to do all three" into the plan itself, that's implicit from the labeled options and belongs in your own planning, not in the document. **It's fine — expected, even — for the activities' combined time to run longer than the session length.** These are options to pick from live, not a mandatory sequence, so the tutor isn't meant to run all of them every time. Don't shrink or cut activities just to force this stage's total to fit the class length; a plan with more material than one session needs is more useful than one that runs out with time left over.
 
 **Any list of items within an activity (images to describe in a Gallery Tour, sentences to rewrite in Sentence Upgrades, options in a ranking scenario, etc.) should be a bulleted list, not a numbered one.** Numbered lists are reserved for genuine sequential steps (e.g. Controlled Practice exercises the student works through in order); a set of items to choose from or work through in any order reads better as bullets and avoids numbering that can look like it's continuing from an earlier list in the document.
 
-**Write every activity's instructions addressed to the student, in the second person** (e.g. "Read the dialogue below and discuss..." or "Rank these options from most to least important..."), not as stage directions to the tutor (e.g. not "Have the student read the dialogue and discuss..."). This applies throughout the plan — Warm Up Conversation questions, Grammar Focus practice, and every Production activity — not just the handout, since the handout is meant to be the same content minus the tutor-only sections (see below).
+**Write every student-facing line addressed to the student, in the second person** (e.g. "Read the dialogue below and discuss...", "You will hear...", "You will see...", "You will be given...", "Rank these options from most to least important..."), not as stage directions to the tutor (e.g. not "Have the student read the dialogue and discuss..."), and **never refer to "your tutor"**, "the tutor", "the teacher", or "the student" in student-facing text. Say "you will be given a photo" instead of "your tutor will show you a photo", and "you will hear a short story" instead of "your tutor will read a story". This applies throughout the plan — Warm Up Conversation questions, Grammar Focus practice, and every Production activity — not just the handout, since the handout is meant to be the same content minus the tutor-only sections (see below).
 
 Calibrate example sentences, instructions, and reading/listening text complexity to the stated CEFR level — don't write B2-complexity examples for an A2 class.
 
@@ -283,6 +286,8 @@ If `python-docx` isn't installed, install it first (`pip install python-docx`) a
 - For a learning path, write the path exactly as the `| Lesson # | ... |` markdown table already used to present it — no reformatting needed
 
 **On Claude Code specifically**, the `docx` skill (part of the `document-skills` plugin in the `anthropic-agent-skills` marketplace) is an alternative if it's already installed, and can produce more elaborate formatting via the docx-js API in its `docx-js.md` — but the bundled script above is the default since it needs no extra install and works identically everywhere.
+
+**Exports are black text only.** The converter forces every style (title, headings, notes) to black; don't add any color formatting to the source markdown or post-process the file with colors.
 
 Name the file `<student-name>-lesson-<n>.docx` (or `<student-name>-<lesson-name>.docx` for a single lesson) and save it in the location the tutor gave you (see above). If a student handout was also requested, name it `<student-name>-lesson-<n>-handout.docx` as a separate file. For a learning path table, name it `<student-name>-learning-path.docx`.
 

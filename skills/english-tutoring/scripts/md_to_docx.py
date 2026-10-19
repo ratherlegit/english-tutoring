@@ -13,7 +13,7 @@ Supports:
     # / ## / ### headings         -> Title / Heading 1 / Heading 2
     **bold** and *italic* inline  -> bold/italic runs (including combined ***both***)
     - / * bullet list items       -> bulleted paragraphs
-    > blockquote lines            -> distinct "note" style (italic, indented, gray)
+    > blockquote lines            -> distinct "note" style (italic, indented, black)
       used for Teacher's Notes so they read as clearly separate from
       student-facing content
     | a | b | markdown tables     -> a real Word table (bold header row, gridlines) —
@@ -175,12 +175,28 @@ def parse_table_row(line):
     return [c.strip() for c in cells]
 
 
+def force_black_text(doc):
+    """Make every text style black. Word's default template colors Title and
+    Heading styles blue (and draws a blue rule under the Title); exports must be
+    black text only."""
+    black = RGBColor(0, 0, 0)
+    for style in doc.styles:
+        font = getattr(style, "font", None)
+        if font is not None:
+            font.color.rgb = black
+        pPr = style.element.find(qn("w:pPr"))
+        if pPr is not None:
+            border = pPr.find(qn("w:pBdr"))
+            if border is not None:
+                pPr.remove(border)
+
+
 def convert(input_path, output_path):
     with open(input_path, "r", encoding="utf-8") as f:
         lines = f.read().splitlines()
 
     doc = Document()
-    note_color = RGBColor(0x55, 0x55, 0x55)  # gray, to visually separate notes
+    force_black_text(doc)
     current_list_num_id = None  # tracks the active numbered list, so a new list restarts at 1
 
     i = 0
@@ -235,7 +251,7 @@ def convert(input_path, output_path):
         elif stripped.startswith("> "):
             p = doc.add_paragraph()
             p.paragraph_format.left_indent = Inches(0.3)
-            add_inline_runs(p, stripped[2:].strip(), italic_default=True, color=note_color)
+            add_inline_runs(p, stripped[2:].strip(), italic_default=True)
         elif stripped.startswith("- ") or stripped.startswith("* "):
             p = doc.add_paragraph(style="List Bullet")
             add_inline_runs(p, stripped[2:].strip())
