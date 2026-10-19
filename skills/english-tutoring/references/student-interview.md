@@ -18,7 +18,7 @@ This table describes the underlying information needed, asked as separate questi
 
 Ask these as one batched round of questions where possible, but keep each distinct piece of information (name, level, session length, activity choice, etc.) as its own question rather than folding several into one — a tutor should be able to answer session length without also being forced to answer another preference in the same breath.
 
-**Vocab constraint and vocab count, and home assignment, are NOT part of this initial round.** They only apply to an individual lesson's content, not to path design, so they're asked later, right before a specific lesson is actually drafted (see SKILL.md Step 4). Don't ask a tutor who just wants a learning path to also decide vocab style for a lesson that doesn't exist yet.
+**Vocab constraint and home assignment are NOT part of this initial round.** They only apply to an individual lesson's content, not to path design, so they're asked later, right before a specific lesson is actually drafted (see SKILL.md Step 4). Don't ask a tutor who just wants a learning path to also decide vocab style for a lesson that doesn't exist yet.
 
 ## L1 interference cheat sheet
 
