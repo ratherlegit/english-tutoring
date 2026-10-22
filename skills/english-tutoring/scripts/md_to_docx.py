@@ -13,6 +13,7 @@ Supports:
     # / ## / ### headings         -> Title / Heading 1 / Heading 2
     **bold** and *italic* inline  -> bold/italic runs (including combined ***both***)
     - / * bullet list items       -> bulleted paragraphs
+    [label](url) links            -> plain label text (no blue underlined links)
     > blockquote lines            -> distinct "note" style (italic, indented, black)
       used for Teacher's Notes so they read as clearly separate from
       student-facing content
@@ -178,22 +179,52 @@ def parse_table_row(line):
 def force_black_text(doc):
     """Make every text style black. Word's default template colors Title and
     Heading styles blue (and draws a blue rule under the Title); exports must be
-    black text only."""
+    black text only. Works at the XML level so theme colors, table styles and
+    unused styles can't leak color back in."""
+    styles_el = doc.styles.element
+    for color in styles_el.iter(qn("w:color")):
+        for attr in list(color.attrib):
+            del color.attrib[attr]
+        color.set(qn("w:val"), "000000")
+    for border in list(styles_el.iter(qn("w:pBdr"))):
+        border.getparent().remove(border)
     black = RGBColor(0, 0, 0)
     for style in doc.styles:
         font = getattr(style, "font", None)
         if font is not None:
             font.color.rgb = black
-        pPr = style.element.find(qn("w:pPr"))
-        if pPr is not None:
-            border = pPr.find(qn("w:pBdr"))
-            if border is not None:
-                pPr.remove(border)
+
+
+LINK_PATTERN = re.compile(r"\[([^\]]+)\]\([^)]+\)")
+
+
+def strip_links(text):
+    """Turn [label](url) into plain label text so nothing renders as a blue link."""
+    return LINK_PATTERN.sub(r"\1", text)
+
+
+def verify_black(output_path):
+    """Fail loudly if the saved file contains any color other than black/auto,
+    or any hyperlink (which Word renders blue and underlined)."""
+    import zipfile
+
+    problems = []
+    with zipfile.ZipFile(output_path) as z:
+        for name in ("word/document.xml", "word/styles.xml"):
+            xml = z.read(name).decode("utf-8")
+            for val in set(re.findall(r'<w:color [^>]*w:val="([^"]+)"', xml)):
+                if val.lower() not in ("000000", "auto"):
+                    problems.append(f"{name}: color {val}")
+            if "<w:hyperlink" in xml:
+                problems.append(f"{name}: hyperlink")
+    if problems:
+        print("Non-black formatting found: " + "; ".join(problems), file=sys.stderr)
+        sys.exit(1)
 
 
 def convert(input_path, output_path):
     with open(input_path, "r", encoding="utf-8") as f:
-        lines = f.read().splitlines()
+        lines = strip_links(f.read()).splitlines()
 
     doc = Document()
     force_black_text(doc)
@@ -270,6 +301,7 @@ def convert(input_path, output_path):
         i += 1
 
     doc.save(output_path)
+    verify_black(output_path)
 
 
 if __name__ == "__main__":
