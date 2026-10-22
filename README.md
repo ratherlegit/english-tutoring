@@ -1,3 +1,5 @@
+> **This project has moved.** english-tutoring and english-classroom now ship together as one plugin: [ratherlegit/english-teaching](https://github.com/ratherlegit/english-teaching). Install that instead to get both skills at once. This repository will no longer be updated.
+
 # english-tutoring
 
 **A planning assistant for one-on-one English tutors.** Tell it about your student once, and it interviews you, drafts a personalized lesson (or a whole multi-lesson course), and remembers everything for next time, so you spend your prep time refining a strong starting point instead of building one from a blank page.
