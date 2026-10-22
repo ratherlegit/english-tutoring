@@ -15,7 +15,7 @@ Before interviewing anyone, check whether the tutor is naming a student you alre
 
 **Records live outside the skill's own folder, at `~/eng-teaching-records/`, not inside `~/.claude/skills/english-tutoring/`.** This is deliberate: a student's profile, path, and vocab history are personal data that must survive skill updates, reinstalls, or repackaging — they must never be at risk of being wiped out along with the skill's own files. Create `~/eng-teaching-records/` if it doesn't exist yet.
 
-- **If a record exists**: skip Step 1 entirely — do not re-run the interview. Load the student's profile, learning path (if any), and vocab log straight from that file. Ask only a brief check-in: whether anything's changed (interests, exclusions, session length, etc.).
+- **If a record exists**: skip Step 1 entirely — do not re-run the interview. Load the student's profile, learning path (if any), and vocab log straight from that file. Ask only a brief check-in: whether anything's changed (interests, exclusions, session length, etc.). If the record has no English variety, treat it as American without asking.
   - **If there's an active learning path**: remind the tutor what's next (the next "Not yet delivered" row: lesson name, theme, grammar point) and confirm that's still what they want before generating it — don't just assume the path is unchanged. Give them the chance to request something different for this lesson (a different theme, a specific activity, skip ahead, etc.) instead of only offering yes/no.
   - **If there's no learning path** (the student has only ever had one-off lessons): offer to design one now, but make clear it's optional — a tutor who just wants another standalone lesson shouldn't feel pushed into planning a whole path. If they decline or don't respond to the offer, proceed with a single lesson as normal.
   - Then go straight to Step 3/4 to build that lesson (or Step 2 first, if a new path was just approved).
@@ -37,6 +37,7 @@ Ask for the following as **separate questions**, in this order — don't merge d
 - **Location/hometown or country** — ask for the specific place the student is from (city and/or country, e.g. "Barcelona" or "Naples"), not a language-family multiple choice. This is a free-text question like the student's name. Use the specific place as real personalization material (weave in local references, regional context, culturally relevant topics — a Barcelona student and a Naples student shouldn't get interchangeable "European" content). Silently infer the native language and likely L1-interference patterns from the location using `references/student-interview.md`'s cheat sheet — this informs your error-anticipation without needing to surface CEFR/linguistics jargon back to the tutor
 - **Interests / profession / hobbies** — used to personalize example sentences and topics, which drives engagement far more than generic content
 - **Goal for learning English** — exam, travel, work, immigration, general fluency — this should steer topic and skill choice as much as the level does
+- **English variety** — American or British English. Offer **American (default)** first and British second. It controls spelling (color/colour, organize/organise), vocabulary (apartment/flat, elevator/lift), and example places and references. The tutor is American, so if they skip or don't answer, use American
 - **Session length** — its own question, distinct from activity preferences. Offer concrete options such as 30 minutes, 60 minutes, or "something else" (let the tutor specify), and ask separately about frequency if relevant
 - **Activity choice** — its own question. The tutor likely doesn't know what's in `references/teacher-activities.md`, so don't just ask "random or specific" cold. Offer three options: (a) **random** — you pick from the proven activities list each time, (b) the tutor **already has specific activities in mind** (their own, not necessarily from the list) and will name them, or (c) **show me the list first** — in which case display the activity names from `references/teacher-activities.md` (names alone are enough, not the full descriptions), then re-ask whether they want random selection or want to name specific ones now that they've seen it
 - **Single lesson or learning path** — ask only whether it's one lesson or a multi-lesson path. **If a path is chosen, immediately ask how many lessons as the very next question**, before moving on to anything else — don't leave it implicit or bundle it with later questions, and never suggest or default to a specific number
@@ -48,12 +49,12 @@ Ask for the following as **separate questions**, in this order — don't merge d
 Same information, bundled into four open-ended prompts instead of ~11 separate questions. Ask them one at a time, in order — each answer can be a short free-text paragraph covering multiple things at once:
 1. "What's the student's name, pronouns, and current level (or describe what they can/can't do if you're not sure)?"
 2. "Where are they from, and what are their interests, profession, or hobbies?"
-3. "What's their goal for learning English, and how long are your sessions (30 min, 60 min, other)?"
+3. "What's their goal for learning English, how long are your sessions (30 min, 60 min, other), and do you want American or British English (American is the default)?"
 4. "Is this a single lesson or a learning path (if a path, how many lessons)? And any preferences for activities or things to include/exclude — or just say 'you choose' for defaults."
 
 After the four prompts, ask the same closing question as detailed mode: "Do you have any documents from earlier work with this student (old lesson plans, handouts, vocab lists, notes) that I can look at so I don't repeat their vocabulary?"
 
-Parse each free-text answer into the same underlying fields as detailed mode (name, pronouns, level, location, interests, goal, session length, single/path + count, activity choice, key skills, exclusions) before moving to Step 2 — light mode changes how the questions are asked, not what ends up stored in the record. If an answer leaves something out or is ambiguous, ask a quick one-off follow-up for just that item rather than guessing.
+Parse each free-text answer into the same underlying fields as detailed mode (name, pronouns, level, location, interests, goal, English variety, session length, single/path + count, activity choice, key skills, exclusions) before moving to Step 2 — light mode changes how the questions are asked, not what ends up stored in the record. If an answer leaves something out or is ambiguous, ask a quick one-off follow-up for just that item rather than guessing.
 
 ### Importing prior work
 If the tutor shares prior documents, read them all (`.docx`, `.pdf`, `.md`, `.txt`, or pasted text) before building the record, and pull out:
@@ -121,7 +122,7 @@ These only need answering once — for a single-lesson request, ask them right a
 Unless the user specifies their own format, include, **in this order**:
 1. **Objective(s)** — a can-do statement written directly to the student in the second person ("You will be able to..."), never in the third person ("Students will...", "The student will...")
 2. **Warm Up Conversation** — always comes immediately after the objective, before any vocab or content; see below for what goes in it
-3. **Vocab Review** (only from Lesson 2 of a path onward, or any returning student) — see below
+3. **Review of Prior Content** (every lesson that has anything to review, so from Lesson 2 of a path onward or any returning student) — see below
 4. **Fresh Vocabulary** — always include this section (see below)
 5. **Grammar Focus** — scaled to the depth the tutor chose (see "Grammar Focus section" below). **Strong**: presentation/input, controlled practice, and freer practice per the chosen framework (PPP's "Presentation" stage; use whatever this stage is called under a different framework — see `references/lesson-frameworks.md`), and the target grammar is built into the activities too. **Light**: a brief overview only (a short plain-language rule, a formula if there is one, 2-3 examples), with the target grammar woven into the activities' prompts rather than drilled separately. **None**: omit this section entirely and build the lesson around topical activities; don't sneak a grammar explanation back in
 6. **Production/application activities** — students use the language with some autonomy, built from **several** activities per the chosen selection method (see below), not just one. This isn't a wrapping "Production" heading in the document itself, just the label for this stage in your own planning — go straight from Grammar Focus into the first activity's own heading (see "Choosing the activities" below)
@@ -136,13 +137,18 @@ Unless the user specifies their own format, include, **in this order**:
 Timings are suggestions the tutor can flex on mid-lesson, not a rigid schedule — so don't put a time next to every stage/activity heading throughout the plan. Instead, collect all suggested timings into one **Time Summary** section (a short list or small table, e.g. "Warm Up Conversation — ~5 min"), placed near the end of the plan alongside Materials needed. Non-Production stages should sum close to the class length; the Production stage's activity options can add up to more than what's left (see "Choosing the activities" below) — that's intentional headroom, not an error.
 
 ### Warm Up Conversation section
-Always placed immediately after the Objective, before Vocab Review or any lesson content. Not a lesson-topic teaser — a short, genuine check-in on the student's life, to build rapport before the lesson content starts. Include 2-3 open-ended questions about what's actually going on for them, in the spirit of "Any highlights from your week?" and "Anything you're looking forward to in the next couple of weeks?" — **write fresh questions for every lesson** (never repeat the same wording lesson to lesson) and **make them fun and varied in style, not just "how was your week"**. Rotate through different question types, and make at least one of the 2-3 playful: would-you-rather, a harmless hypothetical ("If you could have dinner with anyone..."), this-or-that, a quick favorites round, a silly scenario, a "best/worst" question, a one-minute story prompt, a two truths and a lie opener, or an imagination question tied to the student's interests. Mix in a real check-in (week just past, week ahead, a follow-up on something from a prior lesson) only as one of the questions, not the whole set. Check the record's Warm-Up Log and avoid the types used in the last few lessons, then add this lesson's types to it. Format the questions as a bulleted list, not a paragraph — this is the format to carry into the Student Handout too (see below).
+Always placed immediately after the Objective, before Review of Prior Content or any lesson content. Not a lesson-topic teaser — a short, genuine check-in on the student's life, to build rapport before the lesson content starts. Include 2-3 open-ended questions about what's actually going on for them, in the spirit of "Any highlights from your week?" and "Anything you're looking forward to in the next couple of weeks?" — **write fresh questions for every lesson** (never repeat the same wording lesson to lesson) and **make them fun and varied in style, not just "how was your week"**. Rotate through different question types, and make at least one of the 2-3 playful: would-you-rather, a harmless hypothetical ("If you could have dinner with anyone..."), this-or-that, a quick favorites round, a silly scenario, a "best/worst" question, a one-minute story prompt, a two truths and a lie opener, or an imagination question tied to the student's interests. Mix in a real check-in (week just past, week ahead, a follow-up on something from a prior lesson) only as one of the questions, not the whole set. Check the record's Warm-Up Log and avoid the types used in the last few lessons, then add this lesson's types to it. Format the questions as a bulleted list, not a paragraph — this is the format to carry into the Student Handout too (see below).
 
-### Vocab Review section (recycling)
-New vocabulary that's never revisited doesn't stick. Before introducing new words, spend a few minutes recycling old ones:
-- Pull 2-4 items from the student's Vocabulary Log (in the record file), including words imported from prior work, which are fair game for review even though they must never appear in Fresh Vocabulary as new — prioritize items from lessons that are neither the most recent one (too fresh to need review yet) nor ones already reviewed multiple times, so review rotates through everything taught rather than only ever touching the last lesson's words
-- A quick format works fine: a short prompt sentence with the word blanked out, or "use this word in a sentence about..." tied back to the student's interests
-- Skip this section for a student's first-ever lesson (nothing to review yet)
+### Review of Prior Content section (recycling)
+**Every lesson includes this section whenever the student has any prior content on record** (vocabulary, grammar points, or a previous home assignment). New material that's never revisited doesn't stick, so spend a few minutes recycling before introducing anything new. Draw on whatever exists:
+- **Vocabulary**: pull 2-4 items from the student's Vocabulary Log, including words imported from prior work, which are fair game for review even though they must never appear in Fresh Vocabulary as new. Prioritize items from lessons that are neither the most recent one (too fresh to need review yet) nor ones already reviewed multiple times, so review rotates through everything taught rather than only ever touching the last lesson's words
+- **Grammar**: one quick retrieval task on a grammar point from an earlier lesson (a few prompts, a short error-correction, or "tell me about X using the structure"), rotating through earlier points
+- **Last home assignment**: a brief follow-up on what the student produced (read a sentence aloud, share one answer, fix one error), if one was given
+- Keep it to a few minutes, as short speaking prompts rather than worksheets: a sentence with the word blanked out, "use this word in a sentence about..." tied to the student's interests, or a one-minute retell using the old structure
+- Skip this section only for a student's first-ever lesson with nothing imported (nothing to review yet)
+
+### Home Assignment section
+Included by default. Class time is for speaking, so **writing tasks belong here**, not in the in-class Production stage. Choose 1-2 tasks from the "Home assignment ideas" list in `references/activity-bank.md`, tied to the lesson's theme, vocabulary, and grammar. Keep it doable in 15-20 minutes, address it to the student, and note which one will be reviewed next lesson.
 
 ### Fresh Vocabulary section
 Every lesson gets a standalone new-vocabulary section, not just vocab folded into the presentation stage:
@@ -184,7 +190,7 @@ If the tutor opted in, produce a second copy of the plan after the main one. **T
 - **Materials needed**
 - **Time Summary**
 
-Nothing else changes (the objective, activity instructions, and every other student-facing line are already written to the student, so no rewording is needed). Every other section carries over as-is, in the same order: Warm Up Conversation (including its bulleted questions, unchanged), Vocab Review, Fresh Vocabulary, Grammar Focus, every Production activity's full instructions, Wrap-up, Home Assignment. Since activity instructions are already written addressed to the student (see "Choosing the activities" above), there's no rephrasing to do — copy the content over and delete only the three tutor-only sections.
+Nothing else changes (the objective, activity instructions, and every other student-facing line are already written to the student, so no rewording is needed). Every other section carries over as-is, in the same order: Warm Up Conversation (including its bulleted questions, unchanged), Review of Prior Content, Fresh Vocabulary, Grammar Focus, every Production activity's full instructions, Wrap-up, Home Assignment. Since activity instructions are already written addressed to the student (see "Choosing the activities" above), there's no rephrasing to do — copy the content over and delete only the three tutor-only sections.
 
 Label it plainly with the same title as the main plan plus "Student Handout" (e.g. "# <Student Name> — <Date> — <Theme> — Student Handout") — **don't** add any parenthetical or caption describing what was stripped out (e.g. never write something like "(Teacher's notes and Materials removed)"); the student should never see a trace of what the tutor-only version contained.
 
@@ -202,6 +208,7 @@ Maintain one file per student at `~/eng-teaching-records/<student-name-slug>.md`
 - Location: ...
 - Interests: ...
 - Goal: ...
+- English variety: American/British (default American)
 - Session length: ...
 - Activity choice: ...
 - Vocab constraint: ...
@@ -217,6 +224,9 @@ Maintain one file per student at `~/eng-teaching-records/<student-name-slug>.md`
 | 1 | ... | ... | ... | ... | Delivered 2026-09-24 |
 | 2 | ... | ... | ... | ... | Not yet delivered |
 
+## Activity Log
+- 2026-09-24: Role Play, This or That
+
 ## Warm-Up Log
 - 2026-09-24: would-you-rather, favorites round
 
@@ -224,18 +234,22 @@ Maintain one file per student at `~/eng-teaching-records/<student-name-slug>.md`
 ### 2026-09-24 — Lesson 1: <name>
 - word one
 - word two
+- Grammar: <point taught>
+- Home assignment: <what was set>
 ```
 
 - **Create/update the Profile** at the end of Step 1 (new student) or whenever the tutor changes something during a returning-student check-in (Step 0)
 - **Create/update the Learning Path table** at the end of Step 2, and flip a lesson's Status to "Delivered <date>" immediately after generating it — this is what Step 0 reads to know which lesson is next, without asking the tutor
 - **Before** drafting Fresh Vocabulary for any lesson: read the Vocabulary Log section to see everything already taught to this student
-- **After** finalizing a lesson's vocab list: append the new items under a new dated heading
+- **After** finalizing a lesson's activities: append the chosen Production activities to the Activity Log with the date
+- **Before** choosing activities: read the Activity Log to apply the no-repeat rule
+- **After** finalizing a lesson: append the new vocab items, the grammar point, and the home assignment under a new dated heading
 - If the tutor mentions the student already knows certain words/phrases (from "anything to incorporate or exclude"), log those too so they're excluded from future lessons even though they weren't taught here
 
 ### Choosing the activities
 Include **2-3 activities** in the Production/application stage, not a single fixed one — this fills the available time and gives the tutor real options to choose between, skip, or swap live in the lesson rather than being locked into one plan:
-- **Random**: pick 2-3 that fit the level, topic, and available time from `references/teacher-activities.md`, varied enough that they're not redundant with each other (e.g. don't pair two debate-style activities back to back) — don't force a 5-item ranking scenario into a 20-minute slot
-- **Specific**: use the named activity/activities as given; if the tutor only named one, add 1-2 more (random or judgment-based) so there are still options to fill the time
+- **Random**: pick 2-3 that fit the level, topic, and available time from `references/teacher-activities.md`, using the weight tags there (High = 3, Medium = 2, Low = 1) after filtering. **Never reuse an activity from the student's Activity Log within the last 4 lessons**, and avoid repeating the same activity category (e.g. two debate-style activities) in one lesson. Pick varied enough that they're not redundant with each other (e.g. don't pair two debate-style activities back to back) — don't force a 5-item ranking scenario into a 20-minute slot
+- **Specific**: use the named activity/activities as given (the no-repeat rule doesn't apply to requested activities); if the tutor only named one, add 1-2 more (random or judgment-based) so there are still options to fill the time
 - **Tutor's judgment / unspecified**: default to `references/teacher-activities.md` first since these are proven-effective for this tutor; fall back to `references/activity-bank.md` only if nothing on the teacher's list fits the lesson's goal
 
 **Generate almost all lesson content yourself, especially text.** The whole point is a realistic, usable lesson without the tutor having to go dig up materials. Dialogues, stories, scenarios, discussion questions, data tables — write all of it fresh, tied to the student's interests and level, rather than pointing the tutor at something to find. Only include **at most 1 activity per lesson** that requires the tutor to source real external material — in practice, that's an occasional real photo, video, or audio clip, or (rarely, for authentic-text needs like exam prep) a real article; the three ⚑-marked entries in `references/teacher-activities.md` — and only when it's clearly the best fit for the goal or the tutor specifically asked for one. Gallery tour and data/charts discussion are generated as vivid written descriptions or text-formatted data by default — see their entries in `references/teacher-activities.md` — so they don't count against this cap unless the tutor wants to supply real images/charts instead. **Describe a Picture is different: it genuinely needs a real photo to work as an activity** (a written description defeats the point, since the student is supposed to do the observing), so using it always counts against the cap — see its entry in `references/teacher-activities.md` for what to tell the tutor.
@@ -246,7 +260,11 @@ Present each option under its own heading named after the activity itself (e.g. 
 
 **Any list of items within an activity (images to describe in a Gallery Tour, sentences to rewrite in Sentence Upgrades, options in a ranking scenario, etc.) should be a bulleted list, not a numbered one.** Numbered lists are reserved for genuine sequential steps (e.g. Controlled Practice exercises the student works through in order); a set of items to choose from or work through in any order reads better as bullets and avoids numbering that can look like it's continuing from an earlier list in the document.
 
-**Write every student-facing line addressed to the student, in the second person** (e.g. "Read the dialogue below and discuss...", "You will hear...", "You will see...", "You will be given...", "Rank these options from most to least important..."), not as stage directions to the tutor (e.g. not "Have the student read the dialogue and discuss..."), and **never refer to "your tutor"**, "the tutor", "the teacher", or "the student" in student-facing text. Say "you will be given a photo" instead of "your tutor will show you a photo", and "you will hear a short story" instead of "your tutor will read a story". This applies throughout the plan — Warm Up Conversation questions, Grammar Focus practice, and every Production activity — not just the handout, since the handout is meant to be the same content minus the tutor-only sections (see below).
+**Write every student-facing line addressed to the student, in the second person** (e.g. "Read the dialogue below and discuss...", "You will hear...", "You will see...", "You will be given...", "Rank these options from most to least important..."), not as stage directions to the tutor (e.g. not "Have the student read the dialogue and discuss..."). This applies throughout the plan (Warm Up Conversation questions, Grammar Focus practice, every Production activity) and above all in the Student Handout.
+
+**Hard rule: no student-facing text may mention the tutor, teacher, instructor, or "the student" in any form.** That includes "your tutor", "your teacher", "the tutor", "the teacher", "your instructor", "your coach", "the student", and "the tutor will...". The tutor pastes this material into the lesson and is sitting right next to the student, so "your tutor will show you a photo" is awkward, and it makes a lesson built for this one learner read like generic worksheet text. Rewrite so nobody is named: "you will be given a photo", "you will hear a short story", "listen to the story", "look at the photo". If a human has to do something, use "we" or an imperative ("Let's role-play this dialogue", "Take turns reading"). Never say "ask your tutor"; say "ask me" only if the line truly needs a person, otherwise rephrase. Tutor-only content (Teacher's Notes, Materials needed, Time Summary) is the only place the tutor is mentioned, and it never appears in the handout.
+
+**Before delivering the main plan or the handout, scan the student-facing text for the words tutor, teacher, instructor, and student (case-insensitive) and rewrite every hit.** Do this check every time, not just when you remember to.
 
 Calibrate example sentences, instructions, and reading/listening text complexity to the stated CEFR level — don't write B2-complexity examples for an A2 class.
 
@@ -264,6 +282,8 @@ Give the student one concrete, specific task or question to do right now, in the
 ## Output format
 
 Write the plan as clean markdown with headers per stage — no timing in the headers themselves; all suggested timings live together in the Time Summary section (see Step 4). Don't pad with generic teaching theory the teacher already knows — keep it concrete and usable at the front of a classroom.
+
+**Use the chosen English variety consistently, American by default.** Every word in every output (lesson text, dialogues, vocab words and definitions, example sentences, instructions, handouts, teacher's notes) follows American spelling and usage unless the tutor chose British in Step 1: color, favorite, organize, realize, center, traveling, program, gray, practice (noun and verb), check (not cheque), plus American vocabulary (apartment, elevator, truck, vacation, soccer, cell phone) and American date and measurement conventions. If British was chosen, use it just as consistently. Never mix the two in one document, and match spelling inside quoted student-facing texts as well. Run a quick scan for common British spellings (-our, -ise, -re, -ll- doubling) before delivering.
 
 **Never use an em dash (—) in narrative/body text, in any output this skill produces** (lesson plans, handouts, learning paths, teacher's notes, interview questions, record files, chat responses — everything). Em dashes read as a giveaway of AI-generated writing, and this skill's whole point is realistic, human-feeling content. Use a period, comma, colon, or parentheses instead, or just rephrase as two sentences. The only place an em dash is acceptable is as a formatting separator in a heading or label (e.g. "# Maria — 2026-10-19 — Weekend Plans," "# Maria — 2026-10-19 — Weekend Plans — Student Handout") or in a vocab item's `word – definition` line — and that vocab-item dash should be an en dash (–), not an em dash, per the Fresh Vocabulary format below. When in doubt, don't use one.
 
@@ -291,15 +311,15 @@ A finished lesson plan — or an approved learning path table (see Step 2) — i
 python3 skills/english-tutoring/scripts/md_to_docx.py <plan>.md <output>.docx
 ```
 
-If `python-docx` isn't installed, install it first (`pip install python-docx`) and retry — it's a small, standard library, not a platform-specific plugin. The script (tested end-to-end) handles `#`/`##`/`###` headings, `**bold**`/`*italic*` inline markup, `-`/numbered lists, `> ` blockquote lines (rendered indented, gray, and italic — use this for Teacher's Notes so they read as clearly separate from student-facing content), and standard markdown tables (rendered as a real Word table with a bold header row and gridlines — use this for the learning-path table). Write the source markdown accordingly:
-- Lesson title as `#`, always in the form `<Student Name> — <Date of the lesson> — <Title/Theme>` (e.g. `# Jayden — 2026-10-19 — Planning a Road Trip`). **Never put the lesson number in the title**, and use the lesson date (ask if you don't know it; default to today's date), each stage (Warm Up Conversation, Vocab Review, Fresh Vocabulary, etc.) as `##`
+If `python-docx` isn't installed, install it first (`pip install python-docx`) and retry — it's a small, standard library, not a platform-specific plugin. The script (tested end-to-end) handles `#`/`##`/`###` headings, `**bold**`/`*italic*` inline markup, `-`/numbered lists, `> ` blockquote lines (rendered indented, black, and italic — use this for Teacher's Notes so they read as clearly separate from student-facing content), and standard markdown tables (rendered as a real Word table with a bold header row and gridlines — use this for the learning-path table). Write the source markdown accordingly:
+- Lesson title as `#`, always in the form `<Student Name> — <Date of the lesson> — <Title/Theme>` (e.g. `# Jayden — 2026-10-19 — Planning a Road Trip`). **Never put the lesson number in the title**, and use the lesson date (ask if you don't know it; default to today's date), each stage (Warm Up Conversation, Review of Prior Content, Fresh Vocabulary, etc.) as `##`
 - Bold the vocab word in each `word – definition` line, italicize the example sentence
 - Prefix each Teacher's Note line with `> ` so the script styles it distinctly, whether integrated per-stage or collected at the end
 - For a learning path, write the path exactly as the `| Lesson # | ... |` markdown table already used to present it — no reformatting needed
 
-**On Claude Code specifically**, the `docx` skill (part of the `document-skills` plugin in the `anthropic-agent-skills` marketplace) is an alternative if it's already installed, and can produce more elaborate formatting via the docx-js API in its `docx-js.md` — but the bundled script above is the default since it needs no extra install and works identically everywhere.
+**Always use the bundled converter for lesson plans, handouts, and path tables, on every harness, including Claude Code.** Do not use the `docx` skill, docx-js, or hand-built Word files for these exports: their default heading and title styles are blue, which is the most common way color sneaks back in.
 
-**Exports are black text only.** The converter forces every style (title, headings, notes) to black; don't add any color formatting to the source markdown or post-process the file with colors.
+**Exports are black text only, with no exceptions.** This means no blue headings, no blue title or rule under the title, no colored text, no colored table shading, and no hyperlinks (Word renders them blue and underlined). The converter forces every style to black, turns `[label](url)` into plain label text, and checks the saved file, exiting with an error if any color or hyperlink remains. Never add color formatting to the source markdown or post-process the file. If the converter reports non-black formatting, fix the cause and re-export instead of delivering the file. Do not report an export as done until the converter has printed `Wrote <file>` without an error.
 
 Name the file `<student-name>-lesson-<n>.docx` (or `<student-name>-<lesson-name>.docx` for a single lesson) and save it in the location the tutor gave you (see above). If a student handout was also requested, name it `<student-name>-lesson-<n>-handout.docx` as a separate file. For a learning path table, name it `<student-name>-learning-path.docx`.
 
